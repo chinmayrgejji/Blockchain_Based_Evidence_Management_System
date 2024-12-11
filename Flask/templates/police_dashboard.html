@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Police Dashboard</h2>
+
+        <!-- View Evidence Section -->
+        <h3>View Evidence</h3>
+        <form action="/verify_evidence" method="POST">
+            <label for="evID">Enter Evidence ID:</label>
+            <input type="number" id="evID" name="evID" required>
+            <button type="submit">View</button>
+        </form>
+
+        <!-- Upload Evidence Section -->
+        <h3>Upload Evidence</h3>
+        <form action="/upload_evidence" method="POST" enctype="multipart/form-data">
+            <label for="evID">Evidence ID:</label>
+            <input type="number" id="evID" name="evID" required>
+
+            <label for="evOwner">Description:</label>
+            <input type="text" id="evOwner" name="evOwner" required>
+
+            <label for="evLocation">Location:</label>
+            <input type="text" id="evLocation" name="evLocation" required>
+
+            <label for="evFile">Upload File:</label>
+            <input type="file" id="evFile" name="evFile" required>
+
+            <button type="submit">Upload</button>
+        </form>
+        <button class="logout-btn" onclick="/logout">Logout</button>
+
+        <!-- System Logs Section -->
+        <h3>System Logs</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log[1] }}</td>
+                <td>{{ log[2] }}</td>
+                <td>{{ log[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/logout">Logout</a>
+
+    <!-- Modal for flashed messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <ul>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the modal
+            const modal = document.getElementById("messageModal");
+
+            // Get the close button
+            const closeBtn = document.querySelector(".close-btn");
+
+            // Check if there are messages to display
+            const messages = modal.querySelectorAll("li");
+            if (messages.length > 0) {
+                modal.style.display = "block"; // Show the modal
+            }
+
+            // Close the modal when the close button is clicked
+            closeBtn.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            // Close the modal if user clicks outside the modal content
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>

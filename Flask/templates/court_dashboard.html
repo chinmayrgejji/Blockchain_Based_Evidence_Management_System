@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Court Dashboard</h2>
+
+        <h3>View Evidence</h3>
+        <form action="/verify_evidence" method="POST">
+            <label for="evID">Enter Evidence ID:</label>
+            <input type="number" id="evID" name="evID" required>
+            <button type="submit">View</button>
+        </form>
+
+        <h3>System Logs</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log[1] }}</td>
+                <td>{{ log[2] }}</td>
+                <td>{{ log[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

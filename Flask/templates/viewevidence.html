@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Blockchain Based Evidence Management System</h1>
+    </header>
+    <div class="container">
+        <h2>Evidence Details</h2>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Evidence ID</td>
+                <td>{{ evidence_details.evid }}</td>
+            </tr>
+            <tr>
+                <td>File Name</td>
+                <td>{{ evidence_details.Name }}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{ evidence_details.Owner }}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{ evidence_details.Location }}</td>
+            </tr>
+            <tr>
+                <td>Hash</td>
+                <td>{{ evidence_details.Hash }}</td>
+            </tr>
+            <tr>
+                <td>Upload Timestamp</td>
+                <td>{{ evidence_details.Timestamp }}</td>
+            </tr>
+        </table>
+        <a href="{{ url_for(session['role'] + '_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>
